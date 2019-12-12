@@ -1,0 +1,11 @@
+@import './src/style/variables';
+
+.fanEthSearchBar{
+    display: flex;
+    input {
+        width: 320px;
+    }
+    button {
+        color: #fff;
+    }
+}

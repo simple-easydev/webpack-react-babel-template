@@ -1,0 +1,25 @@
+@import './uikit';
+@import './variables';
+@import './spinner';
+
+@import url('https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700&subset=cyrillic');
+@import url('https://fonts.googleapis.com/css?family=Krub:300,400,500,600,700&subset=cyrillic');
+@import url('https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&subset=cyrillic');
+
+html, body {
+	height: 100%;
+	width: 100%;
+	//padding: 40px 0 0 !important;
+    box-sizing: border-box;
+	overflow: visible !important;
+	margin: 0;
+	//font-family: 'Roboto', arial, sans-serif;
+	font-family: 'Open Sans', arial, sans-serif;
+	font-weight: 400;
+	//color: #5C636E;
+	color: #3e4854;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+}
+
+

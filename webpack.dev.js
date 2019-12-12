@@ -11,7 +11,7 @@ module.exports = {
 		historyApiFallback: true,
         // https: true,
         contentBase:"./public",
-		port: "8080",
+		port: "8081",
 	},
     module: {
       rules: [
@@ -50,6 +50,20 @@ module.exports = {
                 "sass-loader"
             ]
         },
+        {
+          test: /\.(eot|woff|woff2|ttf|gif|png|jpe?g|svg|webp|m4v|webm|mp4)$/i,
+          use: [
+            "file-loader",
+            {
+              loader: "image-webpack-loader",
+              options: {
+                bypassOnDebug: true, // webpack@1.x
+                disable: true, // webpack@2.x and newer
+                outputPath: "images/"
+              }
+            }
+          ]
+        }
       ]
     },
     plugins: [

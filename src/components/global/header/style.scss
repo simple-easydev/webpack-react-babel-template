@@ -1,0 +1,17 @@
+@import './src/style/variables';
+
+.fanEthHeader{
+	height: 80px;
+	display: table;
+	width:100%;
+	h1 {
+		padding-left: 100px;
+		display: table-cell;
+		vertical-align: middle;
+		color: #fff;
+	}
+	.searchBarContainer {
+		display: table-cell;
+		vertical-align: middle;
+	}
+}
