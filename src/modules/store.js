@@ -16,5 +16,6 @@ const store = createStore(
       applyMiddleware(sagaMiddleware),
       window.devToolsExtension ? window.devToolsExtension() : f => f
     )
-  );
+);
+
 export default store;

@@ -11,7 +11,7 @@ module.exports = {
 		historyApiFallback: true,
         // https: true,
         contentBase:"./public",
-		port: "8081",
+		port: "8082",
 	},
     module: {
       rules: [

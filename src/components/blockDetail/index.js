@@ -1,4 +1,4 @@
-import { Component } from 'react';
+import React, { Component } from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from "react-redux";
 import { getBlock, getBlockByNumber, getTranaction } from '../../api/explorer';
@@ -57,13 +57,16 @@ class Blockdetail extends Component {
 		super(props);
 		this.state = {
 			block: null,
-			address: this.props.address,
+			address: this.props.match.params.address,
 			transaction: null
 		};
 	}
 
 	componentWillMount(){
+
 		
+		console.log("ADDRESS ---> ", this.state.address);
+
 		getBlock(this.state.address, (data) => {
 			this.setState({ block: data });
 			if (data.transactions.length > 0){

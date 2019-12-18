@@ -1,8 +1,10 @@
-import { Component } from 'react';
+import React, { Component } from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from "react-redux";
 import SearchBar from '../../search-bar';
-import style from './style.scss';
+import cstyle from './style.scss';
+import gStyle from '../../../style/index.scss';
+const style = {...cstyle, ...gStyle};
 
 
 class Header extends Component {
@@ -41,8 +43,10 @@ class Header extends Component {
 	}
 
 	render() {
+		console.log(style);
+
 		return (
-			<div className={`uk-background-primary ${style.fanEthHeader}`}>
+			<div className={`${style["uk-background-primary"]} ${style.fanEthHeader}`}>
 				<h1> Block Explorer</h1>
 
 				<div className={`${style.searchBarContainer}`}>

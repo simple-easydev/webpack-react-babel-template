@@ -1,13 +1,17 @@
 /* eslint-disable eqeqeq */
-import { Component } from 'react';
-import { bindActionCreators } from 'redux';
+import React from 'react';
+
 import { connect } from "react-redux";
-import style from './style.scss';
+import cstyle from './style.scss';
+import gStyle from '../../../style/index.scss';
+const style = {...gStyle, ...cstyle};
+
+
 import { getEthSatus, getBlockByNumber } from '../../../api/explorer';
-import { setEthState, setPrevBlock } from '../../../modules/blockchain/blockchain.action';
+import * as blockchainAction from '../../../modules/blockchain/blockchain.action';
 import { Link } from "react-router-dom";
 
-class Body extends Component {
+class Body extends React.Component {
 
 	handleScroll = (e) => {
 		(window.pageYOffset || document.documentElement.scrollTop) ?
@@ -15,9 +19,10 @@ class Body extends Component {
 			: !this.state.isTop && this.setState({ isTop: true });
 	}
 
-	onClickloadMoreBlock(e){
+	onClickloadMoreBlock = (e)=>{
 		// eslint-disable-next-line no-console
 		console.log('onClickloadMoreBlock', this.props.blocks);
+
 		const length = this.props.blocks.length;
 		let prevBN = this.props.blocks[length - 1].number - 1;
 		if (prevBN > 0){
@@ -25,6 +30,7 @@ class Body extends Component {
 				this.props.setPrevBlock(result);
 			});
 		}
+		
 	}
 
 
@@ -56,10 +62,6 @@ class Body extends Component {
 
 	constructor(props){
 		super(props);
-		this.state = {
-			blocks: []
-		};
-		this.onClickloadMoreBlock = this.onClickloadMoreBlock.bind(this);
 	}
     
 	componentDidMount(){
@@ -74,15 +76,21 @@ class Body extends Component {
 		
 	}
 
+	componentWillReceiveProps(props){
+		console.log("props ---->", props);
+	}
+
 	render() {
 		
 		const blocks = this.props.blocks;
+		console.log("blocks =====> ", blocks);
+		
 
 		return (
 			<div>
-				<button className={`uk-button uk-button-default`} onClick={this.onClickloadMoreBlock}>Load More Block</button>
+				<button className={`${style["uk-button"]} ${style["uk-button-default"]}`} onClick={this.onClickloadMoreBlock}>Load More Block</button>
 				<div className={`${style.fanEthStatsContainer}`} >
-					<table className="uk-table uk-table-divider">
+					<table className={`${style["uk-table"]} ${style["uk-table-divider"]}`} >
 						<thead>
 							<tr>
 								<th>Block Number</th>
@@ -93,10 +101,11 @@ class Body extends Component {
 						<tbody>
 							{
 								blocks.map((val, index) => (
-									<tr>
+									<tr key={index}>
 										<td>#{val.number}</td>
 										<td>
-											<Link href={`/blockDatail/${val.hash}`} className="uk-button uk-button-text">{val.hash}</Link>
+											<Link to={`/blockDatail/${val.hash}`} className={`${style["uk-button uk-button-text"]}`}>{val.hash}</Link>
+											{/* <h1>{val.hash}</h1> */}
 										</td>
 										<td>{this.getDiffTimeStr(val.timestamp)}</td>
 									</tr>
@@ -111,17 +120,14 @@ class Body extends Component {
 }
 
 
-const mapStateToProps = (state) => ({
-	blocks: state.block.blocks
+const mapStateToProps = ({ blockchain }) => ({
+	blocks: blockchain.blocks,
+	count: blockchain.count
 });
-
-
-const mapDispatchToProps = dispatch => bindActionCreators({
-	setEthState, setPrevBlock
-}, dispatch);
-
 
 export default connect(
 	mapStateToProps,
-	mapDispatchToProps
+	{
+		...blockchainAction
+	}
 )(Body);

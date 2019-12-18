@@ -1,7 +1,9 @@
-import { Component } from 'react';
+import React, { Component } from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from "react-redux";
-import style from './style.scss';
+import cstyle from './style.scss';
+import gStyle from '../../style/index.scss';
+const style = {...gStyle, ...cstyle};
 
 class SearchBar extends Component {
 
@@ -24,9 +26,9 @@ class SearchBar extends Component {
     
 	render() {
 		return (
-			<div class={`uk-search ${style.fanEthSearchBar}`}>
-				<input class="uk-search-input" type="search" placeholder="Tx Hash, Address, or Block #" value={this.state.searchval} onChange={this.onChangeSearch} />
-				<button class={`uk-button uk-button-default`} onClick={this.onClickSearchButton}>Search</button>
+			<div className={`${style["uk-search"]} ${style.fanEthSearchBar}`}>
+				<input className={`${style["uk-search-input"]}`} type="search" placeholder="Tx Hash, Address, or Block #" value={this.state.searchval} onChange={this.onChangeSearch} />
+				<button className={`${style["uk-button"]} ${style["uk-button-default"]}`} onClick={this.onClickSearchButton}>Search</button>
 			</div>
 		);
 	}

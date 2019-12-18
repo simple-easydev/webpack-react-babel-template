@@ -2,10 +2,12 @@
 
 .fanEthSearchBar{
     display: flex;
+    background: #fff;
     input {
         width: 320px;
     }
     button {
+        background: #1e87f0;
         color: #fff;
     }
 }

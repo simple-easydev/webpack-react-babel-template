@@ -1,10 +1,12 @@
 import React , { Component } from 'react';
-import { Route } from "react-router-dom";
+import { Route, Switch } from "react-router-dom";
 import { connect } from "react-redux";
 import ReactGA from 'react-ga';
 import Header from './global/header';
 import Body from './global/body';
 import BlockDetail from './blockDetail';
+
+import * as blockchainAction from '../modules/blockchain/blockchain.action';
 // import './css/animate.scss';
 
 
@@ -48,26 +50,28 @@ class App extends Component {
 	// 	);
 	// }
 
+
 	render() {
 		
 		return (
 			<div>
 				<Header currentUrl={this.state.currentUrl} />
 				<div className="mainContainer" style={{ minHeight: window.outerHeight - 80 }}>
-					{/* <Router onChange={this.handleRoute}>
-						{this.renderDefaultRoutes()}
-					</Router> */}
+					<Switch>
+						<Route exact path="/blockDatail/:address" component={BlockDetail}/>
+						<Route path = "/" component={Body}/>
+					</Switch>
 				</div>
 			</div>
 		);
 	}
 }
 
-const mapStateToProps = (state) => ({
-	
+const mapStateToProps = ({ blockchain }) => ({
+	blocks: blockchain.blocks
 });
 
 export default connect(
 	mapStateToProps,
-	null
+	{...blockchainAction}
 )(App);

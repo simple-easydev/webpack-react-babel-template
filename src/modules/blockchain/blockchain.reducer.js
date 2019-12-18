@@ -11,16 +11,24 @@ const reducer = {
             // eslint-disable-next-line eqeqeq
             if (ethstatus.block.number == state.blocks[0].number) return state;
         }
-
+        console.log("state ==============> ", state);
         state.blocks.unshift(ethstatus.block);
+        const blocks = state.blocks.slice(0);
         return {
-            ...state
+            ...state,
+            blocks
         };
     },
     [actions.setPrevBlock]:(state, block) => {
+
+        console.log("state ==============> ", state);
+        
         state.blocks.push(block);
+        const blocks = state.blocks.slice(0);
+        
         return {
-            ...state
+            ...state,
+            blocks
         };
     }
 };
