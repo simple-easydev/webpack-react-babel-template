@@ -5,9 +5,7 @@ import { Provider } from "react-redux";
 import store from "./modules/store";
 import App from './components/app';
 import { Router } from 'react-router-dom';
-import { createBrowserHistory, createHashHistory } from "history";
-const history = createHashHistory();
-
+import history from "./modules/history";
 
 ReactDOM.render(
     <Provider store={store}>

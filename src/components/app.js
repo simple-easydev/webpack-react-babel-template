@@ -1,77 +1,29 @@
-import React , { Component } from 'react';
-import { Route, Switch } from "react-router-dom";
+import React , { Component, useState, useEffect } from 'react';
+import { Route, Switch, Router } from "react-router-dom";
 import { connect } from "react-redux";
-import ReactGA from 'react-ga';
-import Header from './global/header';
-import Body from './global/body';
-import BlockDetail from './blockDetail';
 
-import * as blockchainAction from '../modules/blockchain/blockchain.action';
 // import './css/animate.scss';
 
+import Home from "./pages/home";
+import Devices from "./pages/devices";
 
-export const routes = {
-	HOME: '/'
-};
+const App = (props) => {
 
-class App extends Component {
+	const [state, setState] = useState({currentUrl:""});
 
-	handleRoute = e => {
-		ReactGA.pageview(e.url);
-		this.setState({ currentUrl: e.url });
-	};
-
-	constructor(props){
-		super(props);
-		this.state = {
-			currentUrl: ''
-		};
-		
-	}
-
-	componentWillMount() {
-		ReactGA.initialize('UA-127710081-1');
-	}
-
-	renderDefaultRoutes = () => [
-		// <Body path="/" />,
-		// <BlockDetail path="/blockDatail/:address" />
-	]
-	// 	return (
-	// 		// [
-	// 		// 	<div>
-	// 		// 		<Body path="/" />
-	// 		// 	</div>,
-	// 		// 	<div path="/blockDatail/:address">
-	// 		// 		<h1>test</h1>
-	// 		// 	</div>
-	// 		// ]
-			
-	// 	);
-	// }
-
-
-	render() {
-		
+	const render = () => {
 		return (
 			<div>
-				<Header currentUrl={this.state.currentUrl} />
 				<div className="mainContainer" style={{ minHeight: window.outerHeight - 80 }}>
 					<Switch>
-						<Route exact path="/blockDatail/:address" component={BlockDetail}/>
-						<Route path = "/" component={Body}/>
+						<Route exact path = "/devices" component={Devices}/>
+						<Route path = "/" component={Home}/>
 					</Switch>
 				</div>
 			</div>
 		);
 	}
+	return render();
 }
 
-const mapStateToProps = ({ blockchain }) => ({
-	blocks: blockchain.blocks
-});
-
-export default connect(
-	mapStateToProps,
-	{...blockchainAction}
-)(App);
+export default App;
