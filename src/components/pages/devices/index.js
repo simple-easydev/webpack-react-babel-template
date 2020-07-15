@@ -32,7 +32,7 @@ const Devices = (props) => {
             return <td className = {style['rebooting']}>REBOOTING</td>
         }else{
 
-            if(controlFrequency){
+            if(controlFrequency != undefined){
                 if(controlFrequency != overviewFrequency){
                     return <td className = {style['red-background']}>{controlFrequency}</td>
                 }else{
@@ -52,7 +52,7 @@ const Devices = (props) => {
         }else{
             // return <button className={`${style["uk-button"]} ${style["uk-button-default"]}`} onClick={(e)=>on_click_restart_btn(e, identification.id, index)}>Reboot</button>
 
-            if(controlFrequency != overviewFrequency && controlFrequency){
+            if(controlFrequency != overviewFrequency && controlFrequency != undefined){
                 return <button className={`${style["uk-button"]} ${style["uk-button-default"]}`} onClick={(e)=>on_click_restart_btn(e, identification.id, index)}>Reboot</button>
             }else{
                 return "";

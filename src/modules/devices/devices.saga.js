@@ -39,7 +39,7 @@ function* getDeviceControlFrequency(deviceId){
     }catch(e){
         console.log("error -->",e);
         yield delay(5000)
-        yield getDeviceControlFrequency(deviceId);
+        return yield getDeviceControlFrequency(deviceId);
     }
 }
 

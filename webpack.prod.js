@@ -1,5 +1,6 @@
 const HtmlWebPackPlugin = require("html-webpack-plugin");
-const CleanWebpackPlugin = require("clean-webpack-plugin");
+const {CleanWebpackPlugin} = require("clean-webpack-plugin");
+
 const path = require("path");
 module.exports = {
     devtool: "devtool: 'source-map'",
@@ -66,11 +67,12 @@ module.exports = {
         }
       ]
     },
-    plugins: [  
+    plugins: [
+        new CleanWebpackPlugin(),
         new HtmlWebPackPlugin({
           template: "public/index.html",
           filename: "index.html",
         }),
-        new CleanWebpackPlugin(path.resolve(__dirname, "build")),
+        
     ]
   };
